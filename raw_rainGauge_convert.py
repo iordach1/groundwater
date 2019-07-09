@@ -42,6 +42,13 @@ for file in input_files:
     dataframe['Inches'] = dataframe['Primary']
     dataframe['Batt (V)'] = 3
 
+    #ah, FORTRAN... pad numbers with leading 0's
+    dataframe['MN'] = dataframe['MN'].apply(lambda x: '{0:0>2}'.format(x))
+    dataframe['DT'] = dataframe['DT'].apply(lambda x: '{0:0>2}'.format(x))
+    dataframe['Hour'] = dataframe['Hour'].apply(lambda x: '{0:0>2}'.format(x))
+    dataframe['Minute'] = dataframe['Minute'].apply(lambda x: '{0:0>2}'.format(x))
+    dataframe['Second'] = dataframe['Second'].apply(lambda x: '{0:0>2}'.format(x))
+
     #drop raw columns
     dataframe.drop(columns = ['TIMESTAMP', 'RECORD', 'Primary', 'Primary_Avg'], inplace = True)
 
