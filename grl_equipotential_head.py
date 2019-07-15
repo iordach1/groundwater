@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+import os, conda; os.environ['PROJ_LIB'] = os.path.join(conda.__file__.split('lib')[0], r'pkgs\proj4-5.2.0-ha925a31_1\Library\share'); del os
+shapefile = open(conda.__file__.split(r'\conda')[0] + r'\shapefile.py','r');replace = shapefile.read().replace("utf-8","latin-1");shapefile.close()
+shapefile = open(conda.__file__.split(r'\conda')[0] + r'\shapefile.py','w');shapefile.write(replace);shapefile.close(); del conda, shapefile
+
 """
 Created on Fri Jul 12 10:23:01 2019
 
