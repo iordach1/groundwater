@@ -13,10 +13,11 @@ Created on Sat Jul 13 22:44:56 2019
 
 import pandas as pd
 import numpy as np
-import matplotlib as mp
 
 #from mpl_toolkits.basemap import Basemap
 from pykrige.ok import OrdinaryKriging
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
 
 def select_water_levels(df, year, condition):
     df = df[(df['TIMESTAMP']>=pd.Timestamp(year = year, month = 1, day = 1)) & (df['TIMESTAMP']<=pd.Timestamp(year = year, month = 12, day = 31))]
