@@ -29,7 +29,7 @@ def distance_from_well (point, well_1): #calculate distance from well at given p
     return np.linalg.norm(point-well_1)
     
 
-Q,S,T = 1500, 0.00025, 250  #pumping rate, storage coefficient, transmissivity
+Q,S,T = -1500, 0.00025, 250  #pumping rate, storage coefficient, transmissivity
 t = np.array([100,500,1000,5000,10000]) #time steps
 
 #grid dimensions 4096x4096 [>16 million nodes] is approaching the limit for what most modern
@@ -60,7 +60,12 @@ for time in t:
     fig = plt.figure(figsize = (15, 15))
     ax = fig.add_subplot(111)
     #cpf = ax.contourf(theis_drawdown, 5, cmap ='seismic')
-    cp = ax.contour(theis_drawdown, levels = np.arange(0,55,5), colors = 'k')
+    cp = ax.contour(theis_drawdown, levels = np.arange(-55,0,5), colors = 'k')
+    ax.scatter([well_1[0],well_2[0],well_3[0]],[well_1[1],well_2[1],well_3[1]], marker ='+', c = 'lightblue', s = 25, linewidth = 25)
+    ax.scatter([well_1[0],well_2[0],well_3[0]],[well_1[1],well_2[1],well_3[1]], marker ='o', s = 10, c= 'lightblue', linewidth = 10)
+    ax.text(well_1[0]+50,well_1[1]-120,'well-1\nQ={0}'.format(Q-500))
+    ax.text(well_2[0]+50,well_2[1]-120,'well-2\nQ={0}'.format(Q+500))
+    ax.text(well_3[0]+50,well_3[1]-120,'well-3\nQ={0}'.format(Q))
     ax.clabel(cp, fontsize = 12, colors = 'k')
-    ax.set_title("t = {0}".format(time))
+    ax.set_title("t = {0}, S = {1}, T = {2}".format(time, S, T))
     plt.show()
